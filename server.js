@@ -18,6 +18,14 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('A user disconnected');
   });
+
+  socket.on('chat message', (message) => {
+    console.log(`Received message: ${message}`);
+
+    // Broadcast the message to all connected clients
+    io.emit('chat message', message);
+  });
+  
 });
 
 const PORT = process.env.PORT || 80;
